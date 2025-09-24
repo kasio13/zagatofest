@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuestionario Web a WhatsApp</title>
+  <link rel="stylesheet" href="style.css"> <!-- opcional -->
+</head>
+<body>
+  <h1>Cuestionario</h1>
+  
+  <form id="cuestionarioForm">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required><br><br>
+
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" required><br><br>
+
+    <label for="comentarios">Comentarios:</label>
+    <textarea id="comentarios" required></textarea><br><br>
+
+    <button type="submit">Enviar a WhatsApp</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
