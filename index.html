@@ -21,9 +21,9 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 20px;
+    padding: 60px 20px 20px 20px;
     position: relative;
   }
 
@@ -31,34 +31,77 @@
   @keyframes bounce { 0%,20%,50%,80%,100% { transform: translateY(0); } 40% { transform: translateY(-7px); } 60% { transform: translateY(-3px); } }
   @keyframes glow { 0%,100% { filter: drop-shadow(0 0 5px gold) drop-shadow(0 0 10px orange); } 50% { filter: drop-shadow(0 0 10px gold) drop-shadow(0 0 20px orange); } }
 
-  .logo { width: 300px; max-width: 80%; animation: fadeIn 2s ease-in-out, bounce 2s infinite, glow 2s ease-in-out infinite; margin-bottom: 30px; }
-  .text-content { font-size: 1.2em; max-width: 800px; line-height: 1.5em; text-shadow: 1px 1px 8px black; animation: fadeIn 2.5s ease-in-out; margin-bottom: 20px; white-space: pre-line; }
-  .btn { display: inline-block; margin-top: 20px; padding: 15px 50px; font-size: 1.2em; font-weight: bold; color: white; background: linear-gradient(to right, #4facfe, #00f2fe); border: none; border-radius: 30px; text-decoration: none; transition: all 0.3s ease; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: fadeIn 3s ease-in-out; }
+  .logo { 
+    width: 300px; 
+    max-width: 80%; 
+    animation: fadeIn 2s ease-in-out, bounce 2s infinite, glow 2s ease-in-out infinite; 
+    margin-bottom: 30px; 
+  }
+
+  .text-content { 
+    font-size: 1.2em; 
+    max-width: 800px; 
+    line-height: 1.5em; 
+    text-shadow: 1px 1px 8px black; 
+    animation: fadeIn 2.5s ease-in-out; 
+    margin-bottom: 40px; 
+    white-space: pre-line; 
+  }
+
+  .btn { 
+    display: inline-block; 
+    margin-top: 20px; 
+    padding: 15px 50px; 
+    font-size: 1.2em; 
+    font-weight: bold; 
+    color: white; 
+    background: linear-gradient(to right, #4facfe, #00f2fe); 
+    border: none; 
+    border-radius: 30px; 
+    text-decoration: none; 
+    transition: all 0.3s ease; 
+    cursor: pointer; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+    animation: fadeIn 3s ease-in-out; 
+  }
   .btn:hover { transform: scale(1.1) rotate(-2deg); background: linear-gradient(to right, #43e97b, #38f9d7); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
 
-  .music-btn { position: absolute; top: 20px; left: 20px; padding: 8px 15px; font-size: 0.9em; font-weight: bold; color: white; background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s ease; }
+  .music-btn { 
+    position: absolute; top: 20px; left: 20px; padding: 8px 15px; font-size: 0.9em; font-weight: bold; color: white; 
+    background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); border: none; border-radius: 20px; cursor: pointer; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s ease; 
+  }
   .music-btn:hover { transform: scale(1.05); box-shadow:0 6px 18px rgba(0,0,0,0.5); }
 
-  #historyIcon { position: absolute; top: 60px; left: 20px; width: 160px; cursor: pointer; display: block; }
+  #historyIcon { 
+    width: 130px; 
+    cursor: pointer; 
+    display: block; 
+    margin-top: 20px; 
+  }
+
+  #youtubeLogo {
+    width: 195px; /* Mitad del tamaño anterior */
+    max-width: 80%;
+    margin-top: 7px; /* Separación reducida con historia */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  #youtubeLogo:hover { transform: scale(1.05); }
+
+  #comingSoon {
+    font-size: 0.8em; /* Más pequeño */
+    font-weight: bold;
+    color: gold;
+    text-shadow: 1px 1px 5px black;
+    margin-bottom: 10px; /* Reduce separación con el logo principal */
+  }
 
   .history-text {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 700px;
-    max-height: 90%;
-    overflow-y: auto;
-    background-color: rgba(0,0,0,0.95);
-    padding: 25px;
-    border-radius: 12px;
-    color: gold;
-    line-height: 1.7em;
-    text-align: left;
-    display: none;
-    z-index: 1000;
-    white-space: pre-line;
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 90%; max-width: 700px; max-height: 90%; overflow-y: auto; 
+    background-color: rgba(0,0,0,0.95); padding: 25px; border-radius: 12px; color: gold; 
+    line-height: 1.7em; text-align: left; display: none; z-index: 1000; white-space: pre-line; 
     box-shadow: 0 0 25px black;
   }
 
@@ -71,14 +114,22 @@
 <body>
 <div class="overlay">
 
-  <!-- Botón de música -->
+  <!-- Botón música -->
   <button class="music-btn" id="musicControl">PLAY</button>
+
+  <!-- Aviso Próximamente -->
+  <div id="comingSoon">PRÓXIMAMENTE: Fecha y hora del torneo</div>
+
+  <!-- Logo principal -->
+  <img src="logo.png" alt="Zagato Fest Logo" class="logo">
 
   <!-- Icono historia -->
   <img src="historia.png" id="historyIcon" alt="Historia">
 
-  <!-- Logo -->
-  <img src="logo.png" alt="Zagato Fest Logo" class="logo">
+  <!-- Logo YouTube -->
+  <a href="https://www.youtube.com/@TheZTournament13" target="_blank">
+    <img src="youtube-logo.png" alt="YouTube" id="youtubeLogo">
+  </a>
 
   <!-- Texto principal -->
   <div class="text-content">
@@ -97,6 +148,13 @@ Los participantes pondrán a prueba estrategias avanzadas, mazos optimizados y s
   <!-- Modal historia -->
   <div class="modal-overlay" id="modalOverlay"></div>
   <div class="history-text" id="historyText">
+    <button id="closeHistoryBtn" style="
+      float: right;
+      background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+      border: none; color: white; font-weight: bold; padding: 8px 15px;
+      border-radius: 8px; cursor: pointer; margin-bottom: 10px;
+    ">CERRAR</button>
+
 Hace miles de años,
 cuando los faraones gobernaban con puño de hierro
 y el Nilo se teñía con la sangre de guerreros traidores,
@@ -148,7 +206,6 @@ function startMusicOnce() {
     document.removeEventListener('touchstart', startMusicOnce);
   }
 }
-
 document.addEventListener('touchstart', startMusicOnce);
 document.addEventListener('click', startMusicOnce);
 
@@ -160,12 +217,14 @@ btn.addEventListener('click', () => {
 const historyIcon = document.getElementById('historyIcon');
 const historyText = document.getElementById('historyText');
 const modalOverlay = document.getElementById('modalOverlay');
+const closeHistoryBtn = document.getElementById('closeHistoryBtn');
+
 function openHistory() { historyText.style.display = 'block'; modalOverlay.style.display = 'block'; }
 function closeHistory() { historyText.style.display = 'none'; modalOverlay.style.display = 'none'; }
+
 historyIcon.addEventListener('click', openHistory);
 modalOverlay.addEventListener('click', closeHistory);
+closeHistoryBtn.addEventListener('click', closeHistory);
 </script>
 </body>
 </html>
-
-

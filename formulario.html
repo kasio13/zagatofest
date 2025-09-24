@@ -19,6 +19,7 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(6px);
+    position: relative;
   }
   form {
     background: rgba(0, 0, 0, 0.75);
@@ -28,6 +29,8 @@
     width: 100%;
     max-width: 450px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    position: relative;
+    z-index: 200;
   }
   h2 {
     text-align: center;
@@ -69,41 +72,112 @@
     gap: 8px;
     margin-top: 10px;
   }
+
+  /* Ventana emergente de reglas */
+  .modal-overlay { 
+    position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); display: none; z-index: 300; 
+  }
+  .rules-text {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 90%; max-width: 500px; max-height: 80%; overflow-y: auto;
+    background-color: rgba(0,0,0,0.95); padding: 25px; border-radius: 12px;
+    color: gold; line-height: 1.5em; text-align: left; display: none; z-index: 400; 
+    white-space: pre-line; box-shadow: 0 0 25px black;
+  }
+  #closeRulesBtn {
+    float: right;
+    background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+    border: none; color: white; font-weight: bold; padding: 8px 15px;
+    border-radius: 8px; cursor: pointer; margin-bottom: 10px;
+  }
+
+  /* Icono de info */
+  #fixedInfoIcon {
+    position: fixed;
+    bottom: 10px;   /* casi al final de la pantalla */
+    left: 75%;      /* 3/4 del ancho */
+    transform: translateX(-50%);
+    width: 150px;  /* tamaño triplicado */
+    height: 150px;
+    cursor: pointer;
+    z-index: 250;
+    transition: transform 0.3s;
+  }
+  #fixedInfoIcon:hover {
+    transform: translateX(-50%) scale(1.1);
+  }
+
 </style>
 </head>
 <body>
-  <div class="container">
-    <form action="https://formspree.io/f/mzzjzpyo" method="POST">
-      <h2>Inscripción Zagato Fest 2025</h2>
+<div class="container">
+  <form action="https://formspree.io/f/mzzjzpyo" method="POST">
+    <h2>Inscripción Zagato Fest 2025</h2>
 
-      <label for="nombre">Nombre completo:</label>
-      <input type="text" id="nombre" name="nombre" required>
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" name="nombre" required>
 
-      <label for="nick">Nick de Master Duel:</label>
-      <input type="text" id="nick" name="nick" required>
+    <label for="nick">Nick de Master Duel:</label>
+    <input type="text" id="nick" name="nick" required>
 
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" name="correo" required>
+    <label for="correo">Correo electrónico:</label>
+    <input type="email" id="correo" name="correo" required>
 
-      <label for="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono" required>
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" required>
 
-      <label for="pais">País / Ciudad:</label>
-      <input type="text" id="pais" name="pais" required>
+    <label for="pais">País / Ciudad:</label>
+    <input type="text" id="pais" name="pais" required>
 
-      <label for="experiencia">Experiencia / Ranking (opcional):</label>
-      <input type="text" id="experiencia" name="experiencia">
+    <label for="experiencia">Experiencia / Ranking (opcional):</label>
+    <input type="text" id="experiencia" name="experiencia">
 
-      <label for="comentarios">Comentarios adicionales:</label>
-      <textarea id="comentarios" name="comentarios" rows="4" placeholder="Si tienes algo que agregar..."></textarea>
+    <label class="checkbox-label">
+      <input type="checkbox" name="reglas" required>
+      Acepto las bases y reglas del torneo
+    </label>
 
-      <label class="checkbox-label">
-        <input type="checkbox" name="reglas" required>
-        Acepto las bases y reglas del torneo
-      </label>
+    <button type="submit">Enviar inscripción</button>
+  </form>
 
-      <button type="submit">Enviar inscripción</button>
-    </form>
+  <!-- Icono info -->
+  <img src="info.png" id="fixedInfoIcon" alt="Info" title="Ver reglas">
+
+  <!-- Ventana emergente reglas -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="rules-text" id="rulesText">
+    <button id="closeRulesBtn">CERRAR</button>
+ 
+      1. Se deben registrar correctamente todos los datos del formulario.<br>
+      2. Los participantes deben respetar los horarios de las rondas.<br>
+      3. Se prohíbe cualquier tipo de trampa o modificación del juego.<br>
+      4. Cada jugador debe presentar su Nick y datos correctos.<br>
+      5. Las decisiones del juez son definitivas.<br>
+      6. Cualquier situación no contemplada será evaluada por la organización.
   </div>
+
+</div>
+
+<script>
+const infoIcon = document.getElementById('fixedInfoIcon');
+const rulesText = document.getElementById('rulesText');
+const modalOverlay = document.getElementById('modalOverlay');
+const closeRulesBtn = document.getElementById('closeRulesBtn');
+
+infoIcon.addEventListener('click', () => {
+  rulesText.style.display = 'block';
+  modalOverlay.style.display = 'block';
+});
+
+modalOverlay.addEventListener('click', () => {
+  rulesText.style.display = 'none';
+  modalOverlay.style.display = 'none';
+});
+
+closeRulesBtn.addEventListener('click', () => {
+  rulesText.style.display = 'none';
+  modalOverlay.style.display = 'none';
+});
+</script>
 </body>
 </html>
