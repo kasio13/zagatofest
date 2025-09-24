@@ -39,7 +39,17 @@
   .music-btn { position: absolute; top: 20px; left: 20px; padding: 8px 15px; font-size: 0.9em; font-weight: bold; color: white; background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); border: none; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s ease; }
   .music-btn:hover { transform: scale(1.05); box-shadow:0 6px 18px rgba(0,0,0,0.5); }
 
-  #historyIcon { position: absolute; top: 60px; left: 20px; width: 160px; cursor: pointer; display: block; }
+  /* Logo de historia igual que el botón */
+  #historyIcon {
+    position: absolute;
+    top: 20px;       /* mismo nivel que botón */
+    left: 120px;     /* separación del botón */
+    height: 45px;    /* igual altura que botón */
+    width: auto;     /* mantiene proporción */
+    cursor: pointer;
+    display: block;
+  }
+
   .history-text { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 700px; width: 90%; background-color: rgba(0,0,0,0.9); padding: 20px; text-align: left; line-height: 1.5em; border-radius: 10px; box-shadow: 0 0 20px black; color: gold; display: none; z-index: 1000; overflow-y: auto; max-height: 80%; white-space: pre-line; }
   .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); display: none; z-index: 900; }
   .side-image { width: 200px; max-width: 80%; margin-top: 30px; animation: fadeIn 2.5s ease-in-out; }
@@ -52,10 +62,10 @@
   <!-- Botón de música -->
   <button class="music-btn" id="musicControl">PLAY</button>
 
-  <!-- Icono historia -->
+  <!-- Logo historia -->
   <img src="historia.png" id="historyIcon" alt="Historia">
 
-  <!-- Logo -->
+  <!-- Logo principal -->
   <img src="logo.png" alt="Zagato Fest Logo" class="logo">
 
   <!-- Texto principal -->
@@ -72,7 +82,7 @@ Los participantes pondrán a prueba estrategias avanzadas, mazos optimizados y s
   <!-- Botón de inscripción -->
   <a href="formulario.html" class="btn">INSCRÍBETE</a>
 
-  <!-- Modal -->
+  <!-- Modal historia -->
   <div class="modal-overlay" id="modalOverlay"></div>
   <div class="history-text" id="historyText">
 Hace miles de años,
@@ -97,17 +107,16 @@ const music = document.getElementById('bgMusic');
 const btn = document.getElementById('musicControl');
 let musicStarted = false;
 
-// Función para iniciar música al primer toque
+// Iniciar música al primer toque/clic
 function startMusicOnce() {
   if (!musicStarted) {
     music.play().catch(err => console.log("Interacción requerida para reproducir audio:", err));
     btn.textContent = 'PAUSAR';
     musicStarted = true;
     document.removeEventListener('touchstart', startMusicOnce);
+    document.removeEventListener('click', startMusicOnce);
   }
 }
-
-// Detectar primer toque en móviles o clic en desktop
 document.addEventListener('touchstart', startMusicOnce);
 document.addEventListener('click', startMusicOnce);
 
