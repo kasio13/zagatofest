@@ -8,7 +8,7 @@
   body {
     margin: 0;
     padding: 0;
-    background: url("imagen 1.jpg") no-repeat center center;
+    background: url("fondocuestionario.jpg") no-repeat center center;
     background-size: cover;
     font-family: Arial, sans-serif;
     color: white;
@@ -40,8 +40,30 @@
   .music-btn:hover { transform: scale(1.05); box-shadow:0 6px 18px rgba(0,0,0,0.5); }
 
   #historyIcon { position: absolute; top: 60px; left: 20px; width: 160px; cursor: pointer; display: block; }
-  .history-text { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 700px; width: 90%; background-color: rgba(0,0,0,0.9); padding: 20px; text-align: left; line-height: 1.5em; border-radius: 10px; box-shadow: 0 0 20px black; color: gold; display: none; z-index: 1000; overflow-y: auto; max-height: 80%; white-space: pre-line; }
+
+  .history-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 700px;
+    max-height: 90%;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,0.95);
+    padding: 25px;
+    border-radius: 12px;
+    color: gold;
+    line-height: 1.7em;
+    text-align: left;
+    display: none;
+    z-index: 1000;
+    white-space: pre-line;
+    box-shadow: 0 0 25px black;
+  }
+
   .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); display: none; z-index: 900; }
+
   .side-image { width: 200px; max-width: 80%; margin-top: 30px; animation: fadeIn 2.5s ease-in-out; }
   audio { display: none; }
 </style>
@@ -72,33 +94,34 @@ Los participantes pondrán a prueba estrategias avanzadas, mazos optimizados y s
   <!-- Botón de inscripción -->
   <a href="formulario.html" class="btn">INSCRÍBETE</a>
 
-  <!-- Modal -->
+  <!-- Modal historia -->
   <div class="modal-overlay" id="modalOverlay"></div>
   <div class="history-text" id="historyText">
-       Hace miles de años, cuando los faraones gobernaban con puño de hierro
-      y el Nilo se teñía con la sangre de guerreros traidores,
-      existía un torneo reservado solo para los más letales.
-      No era un simple juego de cartas: era un campo de honor
-      donde la estrategia y la brutalidad de tus jugadas lo era todo.<br><br>
+Hace miles de años,
+cuando los faraones gobernaban con puño de hierro
+y el Nilo se teñía con la sangre de guerreros traidores,
+existía un torneo reservado solo para los más letales.
+No era un simple juego de cartas: era un campo de honor
+donde la estrategia y la brutalidad de tus jugadas lo era todo.
 
-      El torneo recibió su nombre por una leyenda que recorría las tierras heladas 
-      y los desiertos ardientes: el Fénix Zagato.
-      Se decía que cada vez que un duelista de corazón puro y voluntad indomable
-      se enfrentaba a un desafío imposible, el Fénix se levantaba entre llamas,
-      iluminando el camino y guiando al elegido hacia la victoria…<br><br>
+El torneo recibió su nombre
+por una leyenda que recorría las tierras heladas 
+y los desiertos ardientes: el Fénix Zagato.
+Se decía que cada vez que un duelista de corazón puro y voluntad indomable
+se enfrentaba a un desafío imposible, el Fénix se levantaba entre llamas,
+iluminando el camino y guiando al elegido hacia la victoria…
 
-      Los duelistas de Zagato Fest son descendientes de estos héroes,
-      templados por batallas donde cada error significaba muerte inmediata.
-      Sus mazos no son simples colecciones de cartas: son armas de precisión, 
-      imbuidas con tácticas mortales que podrían hacer temblar incluso a un faraón.<br><br>
+Los duelistas de Zagato Fest son descendientes de estos héroes,
+templados por batallas donde cada error significaba muerte inmediata.
+Sus mazos no son simples colecciones de cartas: son armas de precisión, 
+imbuidas con tácticas mortales que podrían hacer temblar incluso a un faraón.
 
-      Mientras las rondas eliminatorias se suceden,
-      el eco de los antiguos salones de combate resuena en cada carta.
-      Cada movimiento es un desafío a la muerte; cada victoria,
-      una chispa que podría llamar la atención del Fénix.
-      Solo los más despiadados, audaces y sangrientos sobrevivirán,
-      dejando que el Fénix Zagato los eleve entre leyenda y gloria.
-    </div>
+Mientras las rondas eliminatorias se suceden,
+el eco de los antiguos salones de combate resuena en cada carta.
+Cada movimiento es un desafío a la muerte; cada victoria,
+una chispa que podría llamar la atención del Fénix.
+Solo los más despiadados, audaces y sangrientos sobrevivirán,
+dejando que el Fénix Zagato los eleve entre leyenda y gloria.
   </div>
 
   <!-- Imagen final -->
@@ -117,7 +140,6 @@ const music = document.getElementById('bgMusic');
 const btn = document.getElementById('musicControl');
 let musicStarted = false;
 
-// Función para iniciar música al primer toque
 function startMusicOnce() {
   if (!musicStarted) {
     music.play().catch(err => console.log("Interacción requerida para reproducir audio:", err));
@@ -127,17 +149,14 @@ function startMusicOnce() {
   }
 }
 
-// Detectar primer toque en móviles o clic en desktop
 document.addEventListener('touchstart', startMusicOnce);
 document.addEventListener('click', startMusicOnce);
 
-// Botón para pausar/reproducir después
 btn.addEventListener('click', () => {
-  if (music.paused) { music.play(); btn.textContent = 'PAUSAR'; } 
-  else { music.pause(); btn.textContent = 'PLAY'; }
+  if (music.paused) { music.play(); btn.textContent='PAUSAR'; } 
+  else { music.pause(); btn.textContent='PLAY'; }
 });
 
-// Historia modal
 const historyIcon = document.getElementById('historyIcon');
 const historyText = document.getElementById('historyText');
 const modalOverlay = document.getElementById('modalOverlay');
@@ -148,5 +167,3 @@ modalOverlay.addEventListener('click', closeHistory);
 </script>
 </body>
 </html>
-
-
